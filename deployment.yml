@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jhostdp1
+  namespace: boundary
+  labels:
+    app: jenkapp1
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 12
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: jenkpod1
+  template:
+    metadata:
+      labels:
+        app: jenkpod1
+    spec:  
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts
+

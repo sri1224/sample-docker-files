@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: jhostdmn
+  labels:
+    app: jenkdmn
+spec:
+  selector:
+    matchLabels:
+      app: dmnjenkpod
+  template:
+    metadata:
+      labels:
+        app: dmnjenkpod 
+    spec:  
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts
+
